@@ -30,5 +30,5 @@ The lab was composed of the following isolated VirtualBox VMs:
 ## Resources
 
 - [Adam Frisbee's The Complete Splunk Beginner Course](https://www.udemy.com/course/splunker/learn/lecture/22765743#overview)
-- [Hailie Shaw's Splunk: Zero to Power User](https://gale.udemy.com/course/splunk-zero-to-power-user/#instructor-1)
+- [Hailie Shaw's Splunk: Zero to Power User](https://www.udemy.com/course/splunk-zero-to-power-user/#instructor-1)
 - [Official Splunk Documentation](https://docs.splunk.com/Documentation)
