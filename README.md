@@ -17,6 +17,15 @@ The goal of this repository is to provide a structured, hands-on approach to mas
 
 ---
 
+## Executive Summary
+The Splunk Core User lab exercises provided a structured, hands-on environment for exploring and applying core Splunk functionalities. The primary goal of the lab was to develop practical experience in ingesting, searching, and visualizing data, as well as creating knowledge objects such as dashboards, reports, and alerts.
+
+I gained familiarity with essential Splunk operations, including onboarding data from multiple sources, performing searches using the Splunk Search Processing Language (SPL), and generating actionable insights through visualizations. The exercises also reinforced best practices for organizing knowledge objects and managing user access within the Splunk platform.
+
+For a more detailed, technical breakdown of the lab—including step-by-step procedures, screenshots, and analysis—please see the [Splunk Core Lab Documentation](https://github.com/Hardy-Secure/Splunk-Learn/blob/main/Lab-Breakdown.md).
+
+---
+
 ## Lab Environment
 
 The lab was composed of the following isolated VirtualBox VMs:
