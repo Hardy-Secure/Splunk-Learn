@@ -32,7 +32,6 @@ The lab was composed of the following isolated VirtualBox VMs:
 - 🪟 Windows 10 System
 - 🪟 Windows 11 System
 - 🐧 (x2) Linux Ubuntu Server System
-- 🟢 (Possibly) Linux Mint System
 
 ---
 
