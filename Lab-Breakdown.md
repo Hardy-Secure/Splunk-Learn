@@ -10,7 +10,9 @@
 * [Initial Environment Setup](#initial-environment-setup)
   * [Windows Machines](#windows-machines)
   * [Linux Machines](#linux-machines) 
-* Placeholder
+* [Installation Splunk Enterprise on Linux](installation-splunk-enterprise-on-linux)
+* [Forwarding Data into Splunk on Linux](forwarding-data-into-splunk-on-linux)
+* [Forwarding Data into Splunk on Windows](forwarding-data-into-splunk-on-windows)
 
 ## Introduction
 This document provides a comprehensive technical overview of the Splunk Core User lab exercises. It is intended to summarize the key activities, configurations, and workflows completed during the lab, providing a reference for understanding core Splunk functionalities, data ingestion processes, search operations, and reporting techniques.
@@ -33,16 +35,16 @@ The host system used to run the virtual machines is a desktop computer running *
 
 The following virtual machines were deployed as part of the lab environment:
 
-* **Windows 11 Workstation** – IP Address: `192.168.127.`
+* **Windows 11 Workstation** – IP Address: `192.168.32.`
   * Operating System: Windows 11 Pro 🪟
   * Role: Workstation log source for Windows-based event and system data
-* **Windows 10 Workstation** - IP Address: `192.168.127.`
+* **Windows 10 Workstation** - IP Address: `192.168.167.`
   * Operating System: Windows 10 Home 🪟
   * Role: Additional Windows workstation log source for comparative analysis and ingestion testing
-* **Splunk** – IP Address: `192.168.127.`
+* **Splunk** – IP Address: `192.168.222.`
   * Operating System: Ubuntu Server 🐧
   * Role: Primary Splunk Enterprise instance responsible for data indexing, searching, and visualization
-* **SplunkFWD** – IP Address: `192.168.127.` 
+* **SplunkFWD** – IP Address: `192.168.178.` 
   * Operating System: Ubuntu Server 🐧
   * Role: Dedicated forwarder system used to collect and send log data to the Splunk Enterprise instance
 
@@ -50,13 +52,15 @@ The following virtual machines were deployed as part of the lab environment:
 
 All virtual machines' network adapters were changed from "NAT" to "Bridged Adapter", and Promiscuous Mode was set to "Allow All" in their VirtualBox configuration settings.
 
-*Insert VM Network Configuration Image
+![Figure 1 – Virtual Machine Network Adapter Settings](images/fig01-vm-adapter-settings.png)
 
 This configuration enabled testing of centralized log collection, cross-platform data ingestion, and basic forwarder-to-indexer communication within a virtualized lab environment. The setup provides a scalable foundation for expanding into more advanced Splunk use cases, including dashboards, alerts, and security-focused analysis.  
 
 ## Initial Environment Setup
 
 #### Windows Machines
+
+The PuTTY application was installed on the host machine to enable remote connections to Virtual Machines outside of the VirtualBox console. This approach simulates how systems or servers are commonly accessed remotely in enterprise environments to perform updates or configuration changes. For the purposes of this lab, SSH-based remote access was used to allow efficient interaction with the Ubuntu servers, including the ability to easily copy and paste longer commands.
 
 The Windows virtual machines (Windows 10 Workstation and Windows 11 Workstation) were deployed using standard Windows installation procedures. No custom configurations or additional software were applied during the initial setup phase beyond default system settings.
 
@@ -100,3 +104,23 @@ sudo systemctl enable ssh
 ```
 
 This configuration ensured persistent remote access to the Linux-based Splunk systems throughout the duration of the lab.
+
+## Installation of Splunk Enterprise on Linux
+
+The free trial of Splunk Enterprise was used for this lab. After navigating to the Downloads section of the official Splunk website, the Linux installation package for Splunk Enterprise in `.tgz` format was selected. The following `wget` command was then executed on the Splunk Ubuntu virtual machine to initiate the download.
+
+```bash
+sudo wget -O splunk-10.2.0-d749cb17ea65-linux-amd64.tgz "https://download.splunk.com/products/splunk/releases/10.2.0/linux/splunk-10.2.0-d749cb17ea65-linux-amd64.tgz"
+```
+
+This command was run on the Splunk system through a remote SSH connection established using PuTTY from the host machine.
+
+## Forwarding Data into Splunk on Linux
+
+
+
+
+
+
+## Forwarding Data into Splunk on Windows
+
