@@ -156,15 +156,15 @@ After logging into Splunk, navigate to the following location:
 
 `Settings > Forwarding and Receiving > Configure Receiving`
 
-![Figure 3 - Setting Up Receiving Within the Search Head](images/fig03-setting-up-receiving)
+![Figure 3 - Setting Up Receiving Within the Search Head](images/fig03-setting-up-receiving.png)
 
 From this page, **New Receiving Port** is selected and the port is configured as **9997**, which is the default port used by Splunk for receiving forwarded data. After entering the port number, the configuration is saved.
 
-![Figure 4 - Set the Receiving Port as 9997](images/fig04-set-receiving-port)
+![Figure 4 - Set the Receiving Port as 9997](images/fig04-set-receiving-port.png)
 
 Once this step is complete, the search head is actively listening on port 9997 and is ready to receive incoming data from Splunk forwarders deployed throughout the lab environment.
 
-![Figure 5 - Search Head Listening on Port 9997](images/fig05-listen-port-9997)
+![Figure 5 - Search Head Listening on Port 9997](images/fig05-listen-port-9997.png)
 
 ## Forwarding Data into Splunk on Linux
 
