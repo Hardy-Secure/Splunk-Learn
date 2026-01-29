@@ -107,20 +107,72 @@ This configuration ensured persistent remote access to the Linux-based Splunk sy
 
 ## Installation of Splunk Enterprise on Linux
 
-The free trial of Splunk Enterprise was used for this lab. After navigating to the Downloads section of the official Splunk website, the Linux installation package for Splunk Enterprise in `.tgz` format was selected. The following `wget` command was then executed on the Splunk Ubuntu virtual machine to initiate the download.
+### Initial Install
+
+The Splunk Enterprise free trial was used for this lab environment. After navigating to the Downloads section of the official Splunk website, the Linux installation package for Splunk Enterprise in `.tgz` format was selected for deployment. 
+
+The following `wget` command was then executed on the **Splunk** Ubuntu virtual machine to download the installation package directly to the system:
 
 ```bash
 sudo wget -O splunk-10.2.0-d749cb17ea65-linux-amd64.tgz "https://download.splunk.com/products/splunk/releases/10.2.0/linux/splunk-10.2.0-d749cb17ea65-linux-amd64.tgz"
 ```
 
-This command was run on the Splunk system through a remote SSH connection established using PuTTY from the host machine.
+The command was run over a remote SSH session established using PuTTY from the host machine. Using SSH access allowed for efficient interaction with the Linux environment, including the ability to easily copy and paste longer commands. 
+
+Once the download completed, the compressed archive was extracted into the `/opt` directory, which is the standard installation path for Splunk on Linux systems:
+
+```bash
+sudo tar xvzf splunk-10.2.0-d749cb17ea65-linux-amd64.tgz -C /opt
+```
+
+### Starting Splunk Instance
+
+After extraction, the Splunk binaries were available under `/opt/splunk`. The following commands were then used to navigate to the Splunk `bin` directory in preparation for starting the service:
+
+```bash
+cd /opt/splunk/bin
+sudo ./splunk start --accept-license
+```
+
+The `--accept-license` flag automatically accepts the Splunk software license agreement, allowing the service to start without requiring manual confirmation. During the initial startup process, the user is prompted to create an administrative username and password. 
+
+Once initialization completes, Splunk provides a URL for accessing the Splunk web interface. For this lab, the interface is accessed using **http://192.168.0.209:8000**, as DNS was not configured within the lab network.
+
+![Figure 2 – Splunk Web Login](images/fig02-splunk-url.png)
+
+To ensure the Splunk service starts automatically when the Ubuntu server boots, the following command was executed:
+
+```bash
+sudo ./splunk enable boot-start
+```
+
+**Note**: When running this command, the user must be located in the `/opt/splunk/bin` directory.
+
+### Configure Receiving Within Splunk
+
+This Splunk instance serves as the search head within the lab infrastructure. In order to receive data forwarded from other systems, receiving must be enabled through the Splunk web interface.
+
+After logging into Splunk, navigate to the following location: 
+
+`Settings > Forwarding and Receiving > Configure Receiving`
+
+![Figure 3 - Setting Up Receiving Within the Search Head](images/fig03-setting-up-receiving)
+
+From this page, **New Receiving Port** is selected and the port is configured as **9997**, which is the default port used by Splunk for receiving forwarded data. After entering the port number, the configuration is saved.
+
+![Figure 4 - Set the Receiving Port as 9997](images/fig04-set-receiving-port)
+
+Once this step is complete, the search head is actively listening on port 9997 and is ready to receive incoming data from Splunk forwarders deployed throughout the lab environment.
+
+![Figure 5 - Search Head Listening on Port 9997](images/fig05-listen-port-9997)
 
 ## Forwarding Data into Splunk on Linux
 
-
+Our next step is to configure the **SplunkFWD** VM as a universal forwarder.
 
 
 
 
 ## Forwarding Data into Splunk on Windows
 
+Now we move into configuring the **Windows 10 Workstation** and **Windows 11 Workstation** as forwarders. I will only cover the Windows 11 VM in this section, but the process is the same for the Windows 10 VM.
