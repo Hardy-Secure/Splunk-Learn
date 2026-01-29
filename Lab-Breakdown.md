@@ -10,7 +10,7 @@
 * [Initial Environment Setup](#initial-environment-setup)
   * [Windows Machines](#windows-machines)
   * [Linux Machines](#linux-machines) 
-* [Installation Splunk Enterprise on Linux](#installation-splunk-enterprise-on-linux)
+* [Installation of Splunk Enterprise on Linux](#installation-of-splunk-enterprise-on-linux)
 * [Forwarding Data into Splunk on Linux](#forwarding-data-into-splunk-on-linux)
 * [Forwarding Data into Splunk on Windows](#forwarding-data-into-splunk-on-windows)
 
