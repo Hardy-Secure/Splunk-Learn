@@ -10,9 +10,9 @@
 * [Initial Environment Setup](#initial-environment-setup)
   * [Windows Machines](#windows-machines)
   * [Linux Machines](#linux-machines) 
-* [Installation Splunk Enterprise on Linux](installation-splunk-enterprise-on-linux)
-* [Forwarding Data into Splunk on Linux](forwarding-data-into-splunk-on-linux)
-* [Forwarding Data into Splunk on Windows](forwarding-data-into-splunk-on-windows)
+* [Installation Splunk Enterprise on Linux](#installation-splunk-enterprise-on-linux)
+* [Forwarding Data into Splunk on Linux](#forwarding-data-into-splunk-on-linux)
+* [Forwarding Data into Splunk on Windows](#forwarding-data-into-splunk-on-windows)
 
 ## Introduction
 This document provides a comprehensive technical overview of the Splunk Core User lab exercises. It is intended to summarize the key activities, configurations, and workflows completed during the lab, providing a reference for understanding core Splunk functionalities, data ingestion processes, search operations, and reporting techniques.
