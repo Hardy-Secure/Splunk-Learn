@@ -41,7 +41,7 @@ The following virtual machines were deployed as part of the lab environment:
 * **Windows 10 Workstation** - IP Address: `192.168.167.`
   * Operating System: Windows 10 Home 🪟
   * Role: Additional Windows workstation log source for comparative analysis and ingestion testing
-* **Splunk** – IP Address: `192.168.222.`
+* **Splunk** – IP Address: `192.168.209.`
   * Operating System: Ubuntu Server 🐧
   * Role: Primary Splunk Enterprise instance responsible for data indexing, searching, and visualization
 * **SplunkFWD** – IP Address: `192.168.178.` 
@@ -168,10 +168,90 @@ Once this step is complete, the search head is actively listening on port 9997 a
 
 ## Forwarding Data into Splunk on Linux
 
-Our next step is to configure the **SplunkFWD** VM as a universal forwarder.
+The next step in the lab is to configure the SplunkFWD virtual machine as a Splunk Universal Forwarder. Before configuring a Universal Forwarder, it is critical to ensure that receiving is enabled on the Search Head/Indexer, which was completed in the previous section.
 
+In this phase, the Splunk Universal Forwarder for Linux is installed on the SplunkFWD system, a least-privileged user is created to run the forwarder, and the system is configured to forward log data to the Search Head/Indexer.
 
+### Download and Extract the Universal Forwarder
 
+The Splunk Universal Forwarder Downloads section on the official Splunk website was accessed, and the Linux x64 installation package in `.tgz` format was selected. The following `wget` command was executed on the SplunkFWD system to initiate the download:
+
+```bash
+wget -O splunkforwarder-10.2.0-d749cb17ea65-linux-amd64.tgz "https://download.splunk.com/products/universalforwarder/releases/10.2.0/linux/splunkforwarder-10.2.0-d749cb17ea65-linux-amd64.tgz"
+```
+
+The command was run over a remote SSH session established using PuTTY from the host machine.
+
+Once the download completed, the compressed archive was extracted into the `/opt` directory, which is the standard installation location for Splunk components on Linux systems:
+
+```
+sudo tar xvzf splunkforwarder-10.2.0-d749cb17ea65-linux-amd64.tgz -C /opt 
+```
+
+After extraction, the /opt directory was checked to confirm the presence of the splunkforwarder directory, and the working directory was changed accordingly:
+
+```
+cd /opt
+ls
+cd /splunkforwarder
+```
+
+### Create Forwarder User and Set Permissions
+
+The Splunk Universal Forwarder is designed to run under a least-privileged user account. For this reason, a dedicated user named splunkfwd was created and assigned ownership of the Splunk Forwarder directory.
+
+The following commands were executed to create the user and update directory ownership:
+
+```bash
+sudo useradd -m splunkfwd
+sudo chown -R splunkfwd:splunkfwd /opt/splunkforwarder
+```
+
+This ensures that the forwarder runs with minimal privileges while maintaining full access to its required files.
+
+### Configure Forwarding and Data Monitoring
+
+After updating permissions, the working directory was changed to the Universal Forwarder `bin` directory to configure forwarding and data monitoring:
+
+```bash
+/cd opt/splunkforwarder/bin
+```
+
+To configure the Search Head/Indexer as a forwarding target, the following command was executed:
+
+```
+sudo ./splunk add forward-server 192.168.0.209:9997
+```
+
+This command prompts the user to accept the Splunk license agreement and create an administrator username and password for the Universal Forwarder.
+
+Once the administrator account was created, the following command was used to configure which data should be forwarded to the Search Head/Indexer:
+
+```bash
+sudo ./splunk add monitor /var/log
+```
+
+For this lab, the /var/log directory was selected because it contains a wide variety of system and service logs and is typically a high-value data source in Linux environments.
+
+![Figure 6 - Creating UF Administrator and Settting What to Forward](#fig06-config-uf)
+
+### Verify Data Ingestion
+
+To confirm that the Universal Forwarder was configured correctly, the Search Head was accessed through the web interface. After logging in, the **Search & Reporting** application was opened.
+
+The search time range was set to the **last 15 minutes**, and a broad search was performed using the following query:
+
+```bash
+index="main"
+```
+
+![Figure 7 - Setting Search Parameters](#fig07-lin-15min)
+
+If the Universal Forwarder is functioning correctly, events originating from the SplunkFWD system should appear in the search results.
+
+![Figure 8 - Data Received from the SplunkFWD VM](#fig08-splunkfwd-received)
+
+Once data is visible in the search results, the SplunkFWD system has been successfully configured as a Universal Forwarder, and log data is actively being forwarded to the Search Head/Indexer.
 
 ## Forwarding Data into Splunk on Windows
 
