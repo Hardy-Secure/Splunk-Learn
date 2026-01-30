@@ -233,7 +233,7 @@ sudo ./splunk add monitor /var/log
 
 For this lab, the /var/log directory was selected because it contains a wide variety of system and service logs and is typically a high-value data source in Linux environments.
 
-![Figure 6 - Creating UF Administrator and Settting What to Forward](#fig06-config-uf)
+![Figure 6 - Creating UF Administrator and Settting What to Forward](fig06-config-uf)
 
 ### Verify Data Ingestion
 
@@ -245,11 +245,11 @@ The search time range was set to the **last 15 minutes**, and a broad search was
 index="main"
 ```
 
-![Figure 7 - Setting Search Parameters](#fig07-lin-15min)
+![Figure 7 - Setting Search Parameters](fig07-lin-15min)
 
 If the Universal Forwarder is functioning correctly, events originating from the SplunkFWD system should appear in the search results.
 
-![Figure 8 - Data Received from the SplunkFWD VM](#fig08-splunkfwd-received)
+![Figure 8 - Data Received from the SplunkFWD VM](fig08-splunkfwd-received)
 
 Once data is visible in the search results, the SplunkFWD system has been successfully configured as a Universal Forwarder, and log data is actively being forwarded to the Search Head/Indexer.
 
