@@ -35,16 +35,16 @@ The host system used to run the virtual machines is a desktop computer running *
 
 The following virtual machines were deployed as part of the lab environment:
 
-* **Windows 11 Workstation** – IP Address: `192.168.32.`
+* **Windows 11 Workstation** – IP Address: `192.168.0.32`
   * Operating System: Windows 11 Pro 🪟
   * Role: Workstation log source for Windows-based event and system data
-* **Windows 10 Workstation** - IP Address: `192.168.167.`
+* **Windows 10 Workstation** - IP Address: `192.168.0.167`
   * Operating System: Windows 10 Home 🪟
   * Role: Additional Windows workstation log source for comparative analysis and ingestion testing
-* **Splunk** – IP Address: `192.168.209.`
+* **Splunk** – IP Address: `192.168.0.209`
   * Operating System: Ubuntu Server 🐧
   * Role: Primary Splunk Enterprise instance responsible for data indexing, searching, and visualization
-* **SplunkFWD** – IP Address: `192.168.178.` 
+* **SplunkFWD** – IP Address: `192.168.0.178` 
   * Operating System: Ubuntu Server 🐧
   * Role: Dedicated forwarder system used to collect and send log data to the Splunk Enterprise instance
 
