@@ -131,7 +131,7 @@ After extraction, the Splunk binaries were available under `/opt/splunk`. The fo
 
 ```bash
 cd /opt/splunk/bin
-sudo ./splunk start --accept-license
+sudo ./splunk start --accept-license --answer-yes --no-prompt --run-as-root
 ```
 
 The `--accept-license` flag automatically accepts the Splunk software license agreement, allowing the service to start without requiring manual confirmation. During the initial startup process, the user is prompted to create an administrative username and password. 
