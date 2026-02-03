@@ -143,10 +143,10 @@ Once initialization completes, Splunk provides a URL for accessing the Splunk we
 To ensure the Splunk service starts automatically when the Ubuntu server boots, the following command was executed:
 
 ```bash
-sudo ./splunk enable boot-start
+sudo ./splunk enable boot-start --accept-license --answer-yes --no-prompt --run-as-root
 ```
 
-**Note**: When running this command, the user must be located in the `/opt/splunk/bin` directory.
+**Note**: When running this command, the user must be located in the `/opt/splunk/bin` directory. This is an updated command different than the previously used `sudo ./splunk enable boot-start` due to the installed Splunk Instance being a newer version with stricter security.
 
 ### Configure Receiving Within Splunk
 
