@@ -255,4 +255,66 @@ Once data is visible in the search results, the SplunkFWD system has been succes
 
 ## Forwarding Data into Splunk on Windows
 
-Now we move into configuring the **Windows 10 Workstation** and **Windows 11 Workstation** as forwarders. I will only cover the Windows 11 VM in this section, but the process is the same for the Windows 10 VM.
+The next step in the lab is to configure the Windows 10 Workstation and Windows 11 Workstation as Splunk Universal Forwarders. For documentation purposes, this section focuses on the Windows 11 Workstation; however, the configuration process is identical for Windows 10.
+
+The overall process involves configuring firewall rules (when applicable), installing the Splunk Universal Forwarder for Windows, selecting data sources to forward, and verifying that data is successfully received by the Search Head/Indexer.
+
+### Configure Firewall Rules for Windows Search Head/Indexer
+
+**Note**: This step does not apply to the current lab environment, as the Search Head/Indexer is hosted on an Ubuntu Server virtual machine. This section is included for reference in scenarios where Splunk Enterprise is installed on a Windows-based Search Head/Indexer.
+
+When the Search Head/Indexer is installed on a Windows system, the Windows Firewall must be configured to allow incoming traffic on port **9997**, which is the default port used by Splunk to receive forwarded data.
+
+To configure this rule, use the Windows search bar to locate **Windows Defender Firewall with Advanced Security**, then launch it with administrative privileges. Once opened, **Inbound Rules** is selected from the left-hand navigation pane.
+
+![Figure 9 - Windows Firewall Inbound Rules](images/fig09-winfw-inbound.png)
+
+From the right-hand panel, **New Rule** is selected. 
+
+![Figure 10 - Windows Firewall Create New Rule](images/fig10-winfw-newr.png)
+
+In the rule creation wizard, **Port** is selected, the protocol is set to **TCP**, and the specified local port is set to **9997**. The rule is configured to **Allow the connection** and applied to **Domain**, **Private**, and **Public** network profiles. Finally, the rule is named **Splunk** to clearly identify its purpose.
+
+![Figure 11 - Windows Firewall Newly Created Splunk Rule](images/fig11-winfw-splunkr.png)
+
+### Installing the Splunk Universal Forwarder on Windows
+
+To download the Splunk Universal Forwarder for Windows, the user accesses the official Splunk website and logs in to their Splunk account. From there, navigation continues to **Trials & Downloads**, where the Universal Forwarder section is located. The appropriate Windows version is selected and downloaded.
+
+Once the download completes, the `.msi` installer is executed on the Windows virtual machine.
+
+When the installer launches, the license agreement is accepted, and the option “**Use this UniversalForwarder with: An on-premises Splunk Enterprise instance**” is confirmed. The **Customize Options** button is then selected to proceed with configuration.
+
+![Figure 12 - Opening the UniversalForwarder Installer](images/fig12-spluf-1.png)
+
+Next, the Universal Forwarder installation directory is selected. For this lab environment, SSL configuration is not used, so the SSL configuration page is skipped without making changes.
+
+On the following screen, the option to install the Universal Forwarder as a **Virtual Account** is selected. No changes are made to the default permissions granted to the Virtual Account in Windows.
+
+During the data selection phase, all available options are selected to forward a wide range of Windows data sources to the Search Head/Indexer for analysis.
+
+![Figure 13 - Configure What to Forward from the Windows VM](images/fig13-spluf-2.png)
+
+The installer then prompts the user to create an administrator username and password for the Universal Forwarder. After credentials are created, the deployment server configuration step is skipped, as a deployment server is not used in this lab environment.
+
+At the forwarding destination configuration screen, the IP address and port of the Search Head/Indexer are specified.
+
+![Figure 14 - Specify the IP and Port Destination for the Search Head/Indexer](images/fig14-spluf-3.png)
+
+The installation is then completed by selecting **Install** and allowing the setup process to finish.
+
+### Verify Windows Data Ingestion
+
+Once installation is complete, the Search Head is accessed through the Splunk web interface to confirm that data is being received from the Windows system.
+
+Within Splunk, the **Search & Reporting** application is opened, the time range is set to the **last 15 minutes**, and a broad search is performed using:
+
+``bash
+index="main"
+``
+
+If the Universal Forwarder is configured correctly, events originating from the **Windows 11 Workstation** (**Windesktop1**) will appear in the search results.
+
+![Figure 15 - Data Flowing from the Windows 11 Workstation](images/fig15-spluf-4.png)
+
+Once Windows event data is visible in Splunk, the Windows system has been successfully configured as a Universal Forwarder, completing the Windows data-forwarding setup for the lab.
