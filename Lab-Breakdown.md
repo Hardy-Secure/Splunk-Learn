@@ -309,9 +309,9 @@ Once installation is complete, the Search Head is accessed through the Splunk we
 
 Within Splunk, the **Search & Reporting** application is opened, the time range is set to the **last 15 minutes**, and a broad search is performed using:
 
-``bash
+```bash
 index="main"
-``
+```
 
 If the Universal Forwarder is configured correctly, events originating from the **Windows 11 Workstation** (**Windesktop1**) will appear in the search results.
 
